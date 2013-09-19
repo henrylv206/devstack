@@ -20,11 +20,20 @@
 
 # Learn more and get the most recent version at http://devstack.org
 
+# Added by HenryLv
+echo -e "\033[31;42m Start DevStack Install Script: stack.sh \033[0m"
+read -n 1
+
 # Make sure custom grep options don't get in the way
 unset GREP_OPTIONS
 
 # Keep track of the devstack directory
 TOP_DIR=$(cd $(dirname "$0") && pwd)
+
+# Added by HenryLv
+echo -e "\033[31;42m Install dir: $TOP_DIR \033[0m"
+read -n 1
+
 
 # Import common functions
 source $TOP_DIR/functions
