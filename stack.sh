@@ -34,6 +34,9 @@ TOP_DIR=$(cd $(dirname "$0") && pwd)
 echo -e "\033[31;42m Install dir: $TOP_DIR \033[0m"
 read -n 1
 
+# Added by HenryLv
+echo -e "\033[31;42m Start import functions: $TOP_DIR/functions \033[0m"
+read -n 1
 
 # Import common functions
 source $TOP_DIR/functions
@@ -70,6 +73,10 @@ GetDistro
 # repositories, branches to configure, and other configuration defaults.
 # ``stackrc`` sources ``localrc`` to allow you to safely override those settings.
 
+# Added by HenryLv
+echo -e "\033[31;42m Check file: $TOP_DIR/stackrc \033[0m"
+read -n 1
+
 if [[ ! -r $TOP_DIR/stackrc ]]; then
     log_error $LINENO "missing $TOP_DIR/stackrc - did you grab more than just stack.sh?"
 fi
@@ -85,6 +92,9 @@ export_proxy_variables
 # Destination path for installation ``DEST``
 DEST=${DEST:-/opt/stack}
 
+# Added by HenryLv
+echo -e "\033[31;42m Install dest dir: $DEST \033[0m"
+read -n 1
 
 # Sanity Check
 # ------------
@@ -94,12 +104,20 @@ if [[ -r $TOP_DIR/.stackenv ]]; then
     rm $TOP_DIR/.stackenv
 fi
 
+# Added by HenryLv
+echo -e "\033[31;42m Check dir: $TOP_DIR/files \033[0m"
+read -n 1
+
 # ``stack.sh`` keeps the list of ``apt`` and ``rpm`` dependencies and config
 # templates and other useful files in the ``files`` subdirectory
 FILES=$TOP_DIR/files
 if [ ! -d $FILES ]; then
     log_error $LINENO "missing devstack/files"
 fi
+
+# Added by HenryLv
+echo -e "\033[31;42m Check dir: $TOP_DIR/lib \033[0m"
+read -n 1
 
 # ``stack.sh`` keeps function libraries here
 # Make sure ``$TOP_DIR/lib`` directory is present
@@ -108,8 +126,22 @@ if [ ! -d $TOP_DIR/lib ]; then
 fi
 
 # Import common services (database, message queue) configuration
+
+# Added by HenryLv
+echo -e "\033[31;42m Import database: $TOP_DIR/lib/database \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/database
+
+# Added by HenryLv
+echo -e "\033[31;42m Import rpc_backend: $TOP_DIR/lib/rpc_backend \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/rpc_backend
+
+# Added by HenryLv
+echo -e "\033[31;42m Disable negated services \033[0m"
+read -n 1
 
 # Remove services which were negated in ENABLED_SERVICES
 # using the "-" prefix (e.g., "-rabbit") instead of
@@ -125,9 +157,17 @@ if [[ ! ${DISTRO} =~ (oneiric|precise|quantal|raring|saucy|7.0|wheezy|sid|testin
     fi
 fi
 
+# Added by HenryLv
+echo -e "\033[31;42m Check rpc backend \033[0m"
+read -n 1
+
 # Make sure we only have one rpc backend enabled,
 # and the specified rpc backend is available on your platform.
 check_rpc_backend
+
+# Added by HenryLv
+echo -e "\033[31;42m What's Screen? Screen_name: $SCREEN_NAME \033[0m"
+read -n 1
 
 # Check to see if we are already running DevStack
 # Note that this may fail if USE_SCREEN=False
@@ -141,6 +181,13 @@ fi
 # Set up logging level
 VERBOSE=$(trueorfalse True $VERBOSE)
 
+# Added by HenryLv
+echo -e "\033[31;42m Log level: $VERBOSE \033[0m"
+read -n 1
+
+# Added by HenryLv
+echo -e "\033[31;42m Check os vendor: $os_VENDOR \033[0m"
+read -n 1
 
 # Additional repos
 # ================
@@ -185,6 +232,10 @@ fi
 # ``stack.sh`` is run as **root**, it automatically creates a **stack** user with
 # sudo privileges and runs as that user.
 
+# Added by HenryLv
+echo -e "\033[31;42m Check EUID: $EUDI \033[0m"
+read -n 1
+
 if [[ $EUID -eq 0 ]]; then
     ROOTSLEEP=${ROOTSLEEP:-10}
     echo "You are running this script as root."
@@ -221,6 +272,10 @@ if [[ $EUID -eq 0 ]]; then
     fi
     exit 1
 else
+    # Added by HenryLv
+    echo -e "\033[31;42m Check sudo \033[0m"
+    read -n 1
+
     # We're not **root**, make sure ``sudo`` is available
     is_package_installed sudo || die "Sudo is required.  Re-run stack.sh as root ONE TIME ONLY to set up sudo."
 
@@ -242,6 +297,10 @@ else
     sudo rm -f /etc/sudoers.d/stack_sh_nova
 fi
 
+# Added by HenryLv
+echo -e "\033[31;42m Create destination dir: $DEST, stack user: $STACK_USER \033[0m"
+read -n 1
+
 # Create the destination directory and ensure it is writable by the user
 # and read/executable by everybody for daemons (e.g. apache run for horizon)
 sudo mkdir -p $DEST
@@ -256,13 +315,25 @@ check_path_perm_sanity ${DEST}
 # access to install prerequisites and fetch repositories.
 OFFLINE=`trueorfalse False $OFFLINE`
 
+# Added by HenryLv
+echo -e "\033[31;42m Check OFFLINE: $OFFLINE \033[0m"
+read -n 1
+
 # Set ``ERROR_ON_CLONE`` to ``True`` to configure ``stack.sh`` to exit if
 # the destination git repository does not exist during the ``git_clone``
 # operation.
 ERROR_ON_CLONE=`trueorfalse False $ERROR_ON_CLONE`
 
+# Added by HenryLv
+echo -e "\033[31;42m Check ERROR_ON_CLONE: $ERROR_ON_CLONE \033[0m"
+read -n 1
+
 # Whether to enable the debug log level in OpenStack services
 ENABLE_DEBUG_LOG_LEVEL=`trueorfalse True $ENABLE_DEBUG_LOG_LEVEL`
+
+# Added by HenryLv
+echo -e "\033[31;42m Check ENABLE_DEBUG_LOG_LEVEL: $ENABLE_DEBUG_LOG_LEVEL \033[0m"
+read -n 1
 
 # Destination path for service data
 DATA_DIR=${DATA_DIR:-${DEST}/data}
