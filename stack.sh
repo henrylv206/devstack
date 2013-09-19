@@ -352,7 +352,16 @@ FLOATING_RANGE=${FLOATING_RANGE:-172.24.4.224/28}
 FIXED_RANGE=${FIXED_RANGE:-10.0.0.0/24}
 FIXED_NETWORK_SIZE=${FIXED_NETWORK_SIZE:-256}
 
+# Added by HenryLv
+echo -e "\033[31;42m IP Config, FLOATING_RANGE: $FLOATING_RANGE, FIXED_RANGE: $FIXED_RANGE, FIXED_NETWORK_SIZE: $FIXED_NETWORK_SIZE \033[0m"
+read -n 1
+
 HOST_IP=$(get_default_host_ip $FIXED_RANGE $FLOATING_RANGE "$HOST_IP_IFACE" "$HOST_IP")
+
+# Added by HenryLv
+echo -e "\033[31;42m Check HOST_IP: $HOST_IP \033[0m"
+read -n 1
+
 if [ "$HOST_IP" == "" ]; then
     die $LINENO "Could not determine host ip address. Either localrc specified dhcp on ${HOST_IP_IFACE} or defaulted"
 fi
@@ -363,53 +372,166 @@ SERVICE_HOST=${SERVICE_HOST:-$HOST_IP}
 # Allow the use of an alternate protocol (such as https) for service endpoints
 SERVICE_PROTOCOL=${SERVICE_PROTOCOL:-http}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check SERVICE_HOST: $SERVICE_HOST and SERVICE_PROTOCOL: $SERVICE_PROTOCOL \033[0m"
+read -n 1
+
 # Configure services to use syslog instead of writing to individual log files
 SYSLOG=`trueorfalse False $SYSLOG`
 SYSLOG_HOST=${SYSLOG_HOST:-$HOST_IP}
 SYSLOG_PORT=${SYSLOG_PORT:-516}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check syslog: SYSLOG: $SYSLOG, SYSLOG_HOST: $SYSLOG_HOST, SYSLOG_PORT: $SYSLOG_PORT \033[0m"
+read -n 1
+
 # Enable sysstat logging
 SYSSTAT_FILE=${SYSSTAT_FILE:-"sysstat.dat"}
 SYSSTAT_INTERVAL=${SYSSTAT_INTERVAL:-"1"}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check SYSSTAT_FILE:$SYSSTAT_FILE, SYSSTAT_INTERVAL:$SYSSTAT_INTERVAL \033[0m"
+read -n 1
+
 # Use color for logging output (only available if syslog is not used)
 LOG_COLOR=`trueorfalse True $LOG_COLOR`
+
+# Added by HenryLv
+echo -e "\033[31;42m Check LOG_COLOR: $LOG_COLOR \033[0m"
+read -n 1
 
 # Service startup timeout
 SERVICE_TIMEOUT=${SERVICE_TIMEOUT:-60}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check SERVICE_TIMEOUT: $SERVICE_TIMEOUT \033[0m"
+read -n 1
 
 # Configure Projects
 # ==================
 
 # Source project function libraries
+
+# Added by HenryLv
+echo -e "\033[31;42m Import apache: $TOP_DIR/lib/apache \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/apache
+
+# Added by HenryLv
+echo -e "\033[31;42m Import tls: $TOP_DIR/lib/tls \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/tls
+
+# Added by HenryLv
+echo -e "\033[31;42m Import infra: $TOP_DIR/lib/infra \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/infra
+
+# Added by HenryLv
+echo -e "\033[31;42m Import oslo: $TOP_DIR/lib/oslo \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/oslo
+
+# Added by HenryLv
+echo -e "\033[31;42m Import horizon: $TOP_DIR/lib/horizon \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/horizon
+
+# Added by HenryLv
+echo -e "\033[31;42m Import keystone: $TOP_DIR/lib/keystone \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/keystone
+
+# Added by HenryLv
+echo -e "\033[31;42m Import glance: $TOP_DIR/lib/glance \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/glance
+
+# Added by HenryLv
+echo -e "\033[31;42m Import nova: $TOP_DIR/lib/nova \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/nova
+
+# Added by HenryLv
+echo -e "\033[31;42m Import cinder: $TOP_DIR/lib/cinder \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/cinder
+
+# Added by HenryLv
+echo -e "\033[31;42m Import swift: $TOP_DIR/lib/swift \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/swift
+
+# Added by HenryLv
+echo -e "\033[31;42m Import ceilometer: $TOP_DIR/lib/ceilomemter \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/ceilometer
+
+# Added by HenryLv
+echo -e "\033[31;42m Import heat: $TOP_DIR/lib/heat \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/heat
+
+# Added by HenryLv
+echo -e "\033[31;42m Import neutron: $TOP_DIR/lib/neutron \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/neutron
+
+# Added by HenryLv
+echo -e "\033[31;42m Import baremetal: $TOP_DIR/lib/baremetal \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/baremetal
+
+# Added by HenryLv
+echo -e "\033[31;42m Import ldap: $TOP_DIR/lib/ldap \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/ldap
+
+# Added by HenryLv
+echo -e "\033[31;42m Import ironic: $TOP_DIR/lib/ironic \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/ironic
+
+# Added by HenryLv
+echo -e "\033[31;42m Import trove: $TOP_DIR/lib/trove \033[0m"
+read -n 1
+
 source $TOP_DIR/lib/trove
 
 # Look for Nova hypervisor plugin
 NOVA_PLUGINS=$TOP_DIR/lib/nova_plugins
 if is_service_enabled nova && [[ -r $NOVA_PLUGINS/hypervisor-$VIRT_DRIVER ]]; then
+
+    # Added by HenryLv
+    echo -e "\033[31;42m Check hypervisor: $NOVA_PLUGINS/hypervisor-$VIRT_DRIVER \033[0m"
+    read -n 1
+
     # Load plugin
     source $NOVA_PLUGINS/hypervisor-$VIRT_DRIVER
 fi
 
 # Set the destination directories for other OpenStack projects
 OPENSTACKCLIENT_DIR=$DEST/python-openstackclient
+
+# Added by HenryLv
+echo -e "\033[31;42m Check OPENSTACKCLIENT: $OPENSTACKCLIENT_DIR \033[0m"
+read -n 1
 
 # Interactive Configuration
 # -------------------------
@@ -471,12 +593,20 @@ function read_password {
 
 initialize_database_backends && echo "Using $DATABASE_TYPE database backend" || echo "No database enabled"
 
+# Added by HenryLv
+echo -e "\033[31;42m Check database type: $DATABASE_TYPE \033[0m"
+read -n 1
 
 # Queue Configuration
 
 # Rabbit connection info
 if is_service_enabled rabbit; then
     RABBIT_HOST=${RABBIT_HOST:-localhost}
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Check rabbit host: $RABBIT_HOST \033[0m"
+    read -n 1
+    
     read_password RABBIT_PASSWORD "ENTER A PASSWORD TO USE FOR RABBIT."
 fi
 
@@ -565,6 +695,10 @@ if [[ -n "$LOGFILE" || -n "$SCREEN_LOGDIR" ]]; then
     LOGDAYS=${LOGDAYS:-7}
     CURRENT_LOG_TIME=$(date "+$TIMESTAMP_FORMAT")
 fi
+
+# Added by HenryLv
+echo -e "\033[31;42m Check timestamp_format: $TIMESTAMP_FORMAT, log file: $LOGFILE, screen_logdir: $SCREEN_LOGDIR, logdays: $LOGDAYS, current log time: $CURRENT_LOG_TIME \033[0m"
+read -n 1
 
 if [[ -n "$LOGFILE" ]]; then
     # First clean up old log files.  Use the user-specified ``LOGFILE``
@@ -670,29 +804,64 @@ set -o xtrace
 # Install package requirements
 # Source it so the entire environment is available
 echo_summary "Installing package prerequisites"
+
+# Added by HenryLv
+echo -e "\033[31;42m Installing packages prerequisites: $TOP_DIR/tools/install_prereqs.sh \033[0m"
+read -n 1
+
 source $TOP_DIR/tools/install_prereqs.sh
+
+
+# Added by HenryLv
+echo -e "\033[31;42m Run script: $TOP_DIR/tools/install_pip.sh \033[0m"
+read -n 1
 
 # Configure an appropriate python environment
 $TOP_DIR/tools/install_pip.sh
 
+# Added by HenryLv
+echo -e "\033[31;42m Run script: $TOP_DIR/tools/fixup_stuff.sh \033[0m"
+read -n 1
+
 # Do the ugly hacks for borken packages and distros
 $TOP_DIR/tools/fixup_stuff.sh
+
+# Added by HenryLv
+echo -e "\033[31;42m Install rpc backend \033[0m"
+read -n 1
 
 install_rpc_backend
 
 if is_service_enabled $DATABASE_BACKENDS; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Install database \033[0m"
+    read -n 1
+    
     install_database
 fi
 
 if is_service_enabled neutron; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Install neutron agent packages \033[0m"
+    read -n 1
+
     install_neutron_agent_packages
 fi
 
 TRACK_DEPENDS=${TRACK_DEPENDS:-False}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check track depends: $TRACK_DEPENDS \033[0m"
+read -n 1
+
 # Install python packages into a virtualenv so that we can track them
 if [[ $TRACK_DEPENDS = True ]]; then
     echo_summary "Installing Python packages into a virtualenv $DEST/.venv"
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Installing Python packages into a virtualenv $DEST/.venv \033[0m"
+    read -n 1
+    
     pip_install -U virtualenv
 
     rm -rf $DEST/.venv
@@ -706,36 +875,94 @@ fi
 
 echo_summary "Installing OpenStack project source"
 
+# Added by HenryLv
+echo -e "\033[31;42m Installing OpenStack project source \033[0m"
+read -n 1
+
 # Install required infra support libraries
+# Added by HenryLv
+echo -e "\033[31;42m Install infra \033[0m"
+read -n 1
+
 install_infra
 
 # Install oslo libraries that have graduated
+
+# Added by HenryLv
+echo -e "\033[31;42m Install oslo \033[0m"
+read -n 1
+
 install_oslo
 
 # Install clients libraries
+# Added by HenryLv
+echo -e "\033[31;42m Install keystone client \033[0m"
+read -n 1
+
 install_keystoneclient
+
+# Added by HenryLv
+echo -e "\033[31;42m Install glance client \033[0m"
+read -n 1
+
 install_glanceclient
+
+# Added by HenryLv
+echo -e "\033[31;42m Install cinder client \033[0m"
+read -n 1
+
 install_cinderclient
+
+# Added by HenryLv
+echo -e "\033[31;42m Install nova client \033[0m"
+read -n 1
+
 install_novaclient
 if is_service_enabled swift glance horizon; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Install swift client \033[0m"
+    read -n 1
+    
     install_swiftclient
 fi
 if is_service_enabled neutron nova horizon; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Install neutron client \033[0m"
+    read -n 1
+
     install_neutronclient
 fi
 if is_service_enabled heat horizon; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Install heat client \033[0m"
+    read -n 1
+
     install_heatclient
 fi
+
+# Added by HenryLv
+echo -e "\033[31;42m Check OPENSTACKCLIENT_REPO: $OPENSTACKCLIENT_REPO, OPENSTACKCLIENT_DIR: $OPENSTACKCLIENT_DIR, OPENSTACKCLIENT_BRANCH: $OPENSTACKCLIENT_BRANCH \033[0m"
+read -n 1
 
 git_clone $OPENSTACKCLIENT_REPO $OPENSTACKCLIENT_DIR $OPENSTACKCLIENT_BRANCH
 setup_develop $OPENSTACKCLIENT_DIR
 
 if is_service_enabled key; then
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Install and config keystone \033[0m"
+    read -n 1
+
     install_keystone
     configure_keystone
 fi
 
 if is_service_enabled s-proxy; then
+
+    # Added by HenryLv
+    echo -e "\033[31;42m Install and config swift \033[0m"
+    read -n 1
+
     install_swift
     configure_swift
 
@@ -745,26 +972,48 @@ if is_service_enabled s-proxy; then
         S3_SERVICE_PORT=8080
         git_clone $SWIFT3_REPO $SWIFT3_DIR $SWIFT3_BRANCH
         setup_develop $SWIFT3_DIR
+        
+        # Added by HenryLv
+        echo -e "\033[31;42m Check S3, S3_SERVICE_PORT: $S3_SERVICE_PORT, SWIFT3_REPO: $SWIFT3_REPO, SWIFT3_DIR: $SWIFT3_DIR, SWIFT3_BRANCH: $SWIFT3_BRANCH \033[0m"
+        read -n 1
     fi
 fi
 
 if is_service_enabled g-api n-api; then
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Install and config glance \033[0m"
+    read -n 1
+
     # image catalog service
     install_glance
     configure_glance
 fi
 
 if is_service_enabled cinder; then
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Install and config cinder \033[0m"
+    read -n 1
+
     install_cinder
     configure_cinder
 fi
 
 if is_service_enabled neutron; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Install neutron \033[0m"
+    read -n 1
+        
     install_neutron
     install_neutron_third_party
 fi
 
 if is_service_enabled nova; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Install and nova \033[0m"
+    read -n 1
+    
     # compute service
     install_nova
     cleanup_nova
@@ -774,20 +1023,36 @@ fi
 if is_service_enabled n-novnc; then
     # a websockets/html5 or flash powered VNC console for vm instances
     git_clone $NOVNC_REPO $NOVNC_DIR $NOVNC_BRANCH
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Check NOVNC_REPO: $NOVNC_REPO, NOVNC_DIR: $NOVNC_DIR, NOVNC_BRANCH: $NOVNC_BRANCH \033[0m"
+    read -n 1
 fi
 
 if is_service_enabled n-spice; then
     # a websockets/html5 or flash powered SPICE console for vm instances
     git_clone $SPICE_REPO $SPICE_DIR $SPICE_BRANCH
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Check SPICE_REPO: $SPICE_REPO, SPICE_DIR: $SPICE_REPO, SPICE_BRANCH: $SPICE_BRANCH \033[0m"
+    read -n 1
 fi
 
 if is_service_enabled horizon; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Install and config horizon \033[0m"
+    read -n 1
+    
     # dashboard
     install_horizon
     configure_horizon
 fi
 
 if is_service_enabled ceilometer; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Install and config ceilometerclient and ceilometer \033[0m"
+    read -n 1
+
     install_ceilometerclient
     install_ceilometer
     echo_summary "Configuring Ceilometer"
@@ -796,18 +1061,30 @@ if is_service_enabled ceilometer; then
 fi
 
 if is_service_enabled heat; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Install and config heat \033[0m"
+    read -n 1
+    
     install_heat
     cleanup_heat
     configure_heat
 fi
 
 if is_service_enabled trove; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Install and config trove \033[0m"
+    read -n 1
+    
     install_trove
     install_troveclient
     cleanup_trove
 fi
 
 if is_service_enabled tls-proxy; then
+    # Added by HenryLv
+    echo -e "\033[31;42m config CA and cert \033[0m"
+    read -n 1
+
     configure_CA
     init_CA
     init_cert
@@ -816,9 +1093,17 @@ if is_service_enabled tls-proxy; then
 fi
 
 if is_service_enabled ir-api ir-cond; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Install and config ironic \033[0m"
+    read -n 1
+
     install_ironic
     configure_ironic
 fi
+
+# Added by HenryLv
+echo -e "\033[31;42m Check TRACK_DEPENDS: $TRACK_DEPENDS \033[0m"
+read -n 1
 
 if [[ $TRACK_DEPENDS = True ]]; then
     $DEST/.venv/bin/pip freeze > $DEST/requires-post-pip
@@ -832,6 +1117,10 @@ fi
 
 # Syslog
 # ------
+
+# Added by HenryLv
+echo -e "\033[31;42m Check SYSLOG: $SYSLOG \033[0m"
+read -n 1
 
 if [[ $SYSLOG != "False" ]]; then
     if [[ "$SYSLOG_HOST" = "$HOST_IP" ]]; then
@@ -871,6 +1160,11 @@ fi
 
 # Finalize queue installation
 # ----------------------------
+
+# Added by HenryLv
+echo -e "\033[31;42m Restart rpc backend \033[0m"
+read -n 1
+
 restart_rpc_backend
 
 
@@ -878,6 +1172,10 @@ restart_rpc_backend
 # ------------------
 
 if is_service_enabled $DATABASE_BACKENDS; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Config database \033[0m"
+    read -n 1
+    
     configure_database
 fi
 
@@ -886,6 +1184,10 @@ fi
 # ----------------
 
 USE_SCREEN=$(trueorfalse True $USE_SCREEN)
+# Added by HenryLv
+echo -e "\033[31;42m Check USE_SCREEN: $USE_SCREEN \033[0m"
+read -n 1
+
 if [[ "$USE_SCREEN" == "True" ]]; then
     # Create a new named screen to run processes in
     screen -d -m -S $SCREEN_NAME -t shell -s /bin/bash
@@ -901,11 +1203,19 @@ fi
 
 # Clear screen rc file
 SCREENRC=$TOP_DIR/$SCREEN_NAME-screenrc
+# Added by HenryLv
+echo -e "\033[31;42m Check SCREENRC: $SCREENRC \033[0m"
+read -n 1
+    
 if [[ -e $SCREENRC ]]; then
     rm -f $SCREENRC
 fi
 
 # Initialize the directory for service status check
+# Added by HenryLv
+echo -e "\033[31;42m Init service check \033[0m"
+read -n 1
+
 init_service_check
 
 
@@ -927,33 +1237,83 @@ fi
 
 if is_service_enabled key; then
     echo_summary "Starting Keystone"
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Init and start keystone \033[0m"
+    read -n 1
+    
     init_keystone
     start_keystone
 
     # Set up a temporary admin URI for Keystone
     SERVICE_ENDPOINT=$KEYSTONE_SERVICE_PROTOCOL://$KEYSTONE_AUTH_HOST:$KEYSTONE_AUTH_PORT/v2.0
 
+    # Added by HenryLv
+    echo -e "\033[31;42m Check SERVICE_ENDPOINT: $SERVICE_ENDPOINT \033[0m"
+    read -n 1
+
     if is_service_enabled tls-proxy; then
         export OS_CACERT=$INT_CA_DIR/ca-chain.pem
         # Until the client support is fixed, just use the internal endpoint
         SERVICE_ENDPOINT=http://$KEYSTONE_AUTH_HOST:$KEYSTONE_AUTH_PORT_INT/v2.0
+        
+        # Added by HenryLv
+        echo -e "\033[31;42m Check OS_CACERT: $OS_CACERT, SERVICE_ENDPOINT: $SERVICE_ENDPOINT \033[0m"
+        read -n 1
+        
     fi
 
     # Do the keystone-specific bits from keystone_data.sh
     export OS_SERVICE_TOKEN=$SERVICE_TOKEN
     export OS_SERVICE_ENDPOINT=$SERVICE_ENDPOINT
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Check OS_SERVICE_TOKEN: $OS_SERVICE_TOKEN, OS_SERVICE_ENDPOINT: $OS_SERVICE_ENDPOINT \033[0m"
+    read -n 1
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Create keystone accounts \033[0m"
+    read -n 1
+    
     create_keystone_accounts
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Create nova accounts \033[0m"
+    read -n 1
+    
     create_nova_accounts
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Create cinder accounts \033[0m"
+    read -n 1
+    
     create_cinder_accounts
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Create neutron accounts \033[0m"
+    read -n 1
+    
     create_neutron_accounts
 
     if is_service_enabled trove; then
+        # Added by HenryLv
+        echo -e "\033[31;42m Create trove accounts \033[0m"
+        read -n 1
+        
         create_trove_accounts
     fi
 
     if is_service_enabled swift || is_service_enabled s-proxy; then
+        # Added by HenryLv
+        echo -e "\033[31;42m Create swift accounts \033[0m"
+        read -n 1
+    
         create_swift_accounts
     fi
+
+    # Added by HenryLv
+    echo -e "\033[31;42m Run script: $FILES/keystone_data.sh \033[0m"
+    read -n 1
 
     # ``keystone_data.sh`` creates services, admin and demo users, and roles.
     ADMIN_PASSWORD=$ADMIN_PASSWORD SERVICE_TENANT_NAME=$SERVICE_TENANT_NAME SERVICE_PASSWORD=$SERVICE_PASSWORD \
@@ -968,6 +1328,11 @@ if is_service_enabled key; then
     export OS_TENANT_NAME=admin
     export OS_USERNAME=admin
     export OS_PASSWORD=$ADMIN_PASSWORD
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Check OS_AUTH_URL: $OS_AUTH_URL, OS_TENANT_NAME: $OS_TENANT_NAME, OS_USERNAME: $OS_USERNAME, OS_PASSWORD: $OS_PASSWORD, OS_SERVICE_TOKEN: $OS_SERVICE_TOKEN, OS_SERVICE_ENDPOINT: $OS_SERVICE_ENDPOINT \033[0m"
+    read -n 1
+    
     unset OS_SERVICE_TOKEN OS_SERVICE_ENDPOINT
 fi
 
@@ -979,6 +1344,11 @@ fi
 
 if is_service_enabled horizon; then
     echo_summary "Configuring and starting Horizon"
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Init and start horizon \033[0m"
+    read -n 1
+    
     init_horizon
     start_horizon
 fi
@@ -989,6 +1359,11 @@ fi
 
 if is_service_enabled g-reg; then
     echo_summary "Configuring Glance"
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Init glance \033[0m"
+    read -n 1
+    
     init_glance
 fi
 
@@ -997,6 +1372,11 @@ fi
 
 if is_service_enabled ir-api ir-cond; then
     echo_summary "Configuring Ironic"
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Init ironic \033[0m"
+    read -n 1
+    
     init_ironic
 fi
 
@@ -1008,9 +1388,17 @@ fi
 if is_service_enabled neutron; then
     echo_summary "Configuring Neutron"
 
+    # Added by HenryLv
+    echo -e "\033[31;42m Config neutron \033[0m"
+    read -n 1
+
     configure_neutron
     # Run init_neutron only on the node hosting the neutron API server
     if is_service_enabled $DATABASE_BACKENDS && is_service_enabled q-svc; then
+        # Added by HenryLv
+        echo -e "\033[31;42m Init neutron \033[0m"
+        read -n 1
+    
         init_neutron
     fi
 fi
@@ -1018,6 +1406,10 @@ fi
 # Some Neutron plugins require network controllers which are not
 # a part of the OpenStack project. Configure and start them.
 if is_service_enabled neutron; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Config, init and start neutron \033[0m"
+    read -n 1
+    
     configure_neutron_third_party
     init_neutron_third_party
     start_neutron_third_party
@@ -1029,6 +1421,10 @@ fi
 
 if is_service_enabled nova; then
     echo_summary "Configuring Nova"
+    # Added by HenryLv
+    echo -e "\033[31;42m Config nova \033[0m"
+    read -n 1
+    
     configure_nova
 fi
 
@@ -1036,6 +1432,11 @@ if is_service_enabled n-net q-dhcp; then
     # Delete traces of nova networks from prior runs
     # Do not kill any dnsmasq instance spawned by NetworkManager
     netman_pid=$(pidof NetworkManager || true)
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Check netman_pid: $netman_pid \033[0m"
+    read -n 1
+    
     if [ -z "$netman_pid" ]; then
         sudo killall dnsmasq || true
     else
@@ -1056,6 +1457,11 @@ fi
 
 if is_service_enabled s-proxy; then
     echo_summary "Configuring Swift"
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Init swift \033[0m"
+    read -n 1
+    
     init_swift
 fi
 
@@ -1065,6 +1471,11 @@ fi
 
 if is_service_enabled cinder; then
     echo_summary "Configuring Cinder"
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Init cinder \033[0m"
+    read -n 1
+    
     init_cinder
 fi
 
@@ -1075,6 +1486,11 @@ fi
 if is_service_enabled nova; then
     echo_summary "Configuring Nova"
     # Rebuild the config file from scratch
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m config and init nova \033[0m"
+    read -n 1
+    
     create_nova_conf
     init_nova
 
@@ -1085,9 +1501,17 @@ if is_service_enabled nova; then
         create_nova_conf_nova_network
     fi
 
+    # Added by HenryLv
+    echo -e "\033[31;42m Check can read from $NOVA_PLUGINS/hypervisor-$VIRT_DRIVER \033[0m"
+    read -n 1
 
     if [[ -r $NOVA_PLUGINS/hypervisor-$VIRT_DRIVER ]]; then
         # Configure hypervisor plugin
+        
+        # Added by HenryLv
+        echo -e "\033[31;42m Config nova hypervisor \033[0m"
+        read -n 1
+        
         configure_nova_hypervisor
 
 
@@ -1209,6 +1633,10 @@ if is_service_enabled nova; then
     # ---------------
 
     else
+        # Added by HenryLv
+        echo -e "\033[31;42m Using libvirt virtualization driver \033[0m"
+        read -n 1
+        
         echo_summary "Using libvirt virtualization driver"
         iniset $NOVA_CONF DEFAULT compute_driver "libvirt.LibvirtDriver"
         LIBVIRT_FIREWALL_DRIVER=${LIBVIRT_FIREWALL_DRIVER:-"nova.virt.libvirt.firewall.IptablesFirewallDriver"}
@@ -1217,7 +1645,15 @@ if is_service_enabled nova; then
         if is_arch "ppc64"; then
             iniset $NOVA_CONF DEFAULT vnc_enabled "false"
         fi
+        
+        # Added by HenryLv
+        echo -e "\033[31;42m Check NOVA_CONF: $NOVA_CONF, LIBVIRT_FIREWALL_DRIVER: $LIBVIRT_FIREWALL_DRIVER \033[0m"
+        read -n 1
     fi
+
+    # Added by HenryLv
+    echo -e "\033[31;42m Init nova cells \033[0m"
+    read -n 1
 
     init_nova_cells
 fi
@@ -1241,18 +1677,33 @@ fi
 # Launch Swift Services
 if is_service_enabled s-proxy; then
     echo_summary "Starting Swift"
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Starting Swift \033[0m"
+    read -n 1
+    
     start_swift
 fi
 
 # Launch the Glance services
 if is_service_enabled g-api g-reg; then
     echo_summary "Starting Glance"
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Starting Glance \033[0m"
+    read -n 1
+    
     start_glance
 fi
 
 # Launch the Ironic services
 if is_service_enabled ir-api ir-cond; then
     echo_summary "Starting Ironic"
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Starting Ironic \033[0m"
+    read -n 1
+    
     start_ironic
 fi
 
@@ -1266,16 +1717,30 @@ if is_service_enabled key && is_service_enabled swift3 && is_service_enabled nov
     iniset $NOVA_CONF DEFAULT s3_access_key "$ACCESS_KEY"
     iniset $NOVA_CONF DEFAULT s3_secret_key "$SECRET_KEY"
     iniset $NOVA_CONF DEFAULT s3_affix_tenant "True"
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Check NOVA_USER_ID: $NOVA_USER_ID, NOVA_TENANT_ID: $NOVA_TENANT_ID, CREDS: $CREDS, ACCESS_KEY: $ACCESS_KEY, SECRET_KEY: $SECRET_KEY \033[0m"
+    read -n 1
 fi
 
 if is_service_enabled zeromq; then
     echo_summary "Starting zermomq receiver"
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Starting zermomq receiver \033[0m"
+    read -n 1
+    
     screen_it zeromq "cd $NOVA_DIR && $NOVA_BIN_DIR/nova-rpc-zmq-receiver"
 fi
 
 # Launch the nova-api and wait for it to answer before continuing
 if is_service_enabled n-api; then
     echo_summary "Starting Nova API"
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Starting Nova API \033[0m"
+    read -n 1
+    
     start_nova_api
 fi
 
@@ -1291,6 +1756,10 @@ elif is_service_enabled $DATABASE_BACKENDS && is_service_enabled n-net; then
         NM_CONF=${NOVA_CELLS_CONF}
     fi
 
+    # Added by HenryLv
+    echo -e "\033[31;42m Check NM_CONF: $NM_CONF, NOVA_BIN_DIR: $NOVA_BIN_DIR \033[0m"
+    read -n 1
+
     # Create a small network
     $NOVA_BIN_DIR/nova-manage --config-file $NM_CONF network create "$PRIVATE_NETWORK_NAME" $FIXED_RANGE 1 $FIXED_NETWORK_SIZE $NETWORK_CREATE_ARGS
 
@@ -1302,24 +1771,42 @@ elif is_service_enabled $DATABASE_BACKENDS && is_service_enabled n-net; then
 fi
 
 if is_service_enabled neutron; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Starting neutron agents \033[0m"
+    read -n 1
+
     start_neutron_agents
 fi
 if is_service_enabled nova; then
     echo_summary "Starting Nova"
+    # Added by HenryLv
+    echo -e "\033[31;42m Starting Nova \033[0m"
+    read -n 1
     start_nova
 fi
 if is_service_enabled cinder; then
     echo_summary "Starting Cinder"
+    # Added by HenryLv
+    echo -e "\033[31;42m Starting Cinder \033[0m"
+    read -n 1
     start_cinder
 fi
 if is_service_enabled ceilometer; then
     echo_summary "Starting Ceilometer"
+    
+    # Added by HenryLv
+    echo -e "\033[31;42m Starting Ceilometer \033[0m"
+    read -n 1
+    
     init_ceilometer
     start_ceilometer
 fi
 
 # Configure and launch heat engine, api and metadata
 if is_service_enabled heat; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Config and start heat \033[0m"
+    read -n 1
     # Initialize heat, including replacing nova flavors
     echo_summary "Configuring Heat"
     init_heat
@@ -1329,6 +1816,10 @@ fi
 
 # Configure and launch the trove service api, and taskmanager
 if is_service_enabled trove; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Config and start trove \033[0m"
+    read -n 1
+    
     # Initialize trove
     echo_summary "Configuring Trove"
     configure_troveclient
@@ -1348,6 +1839,10 @@ fi
 # which is helpful in image bundle steps.
 
 if is_service_enabled nova && is_service_enabled key; then
+    # Added by HenryLv
+    echo -e "\033[31;42m create rc files \033[0m"
+    read -n 1
+
     $TOP_DIR/tools/create_userrc.sh -PA --target-dir $TOP_DIR/accrc
 fi
 
@@ -1368,6 +1863,11 @@ fi
 
 if is_service_enabled g-reg; then
     TOKEN=$(keystone token-get | grep ' id ' | get_field 2)
+
+    # Added by HenryLv
+    echo -e "\033[31;42m Check TOKEN: $TOKEN \033[0m"
+    read -n 1
+
 
     if is_baremetal; then
        echo_summary "Creating and uploading baremetal images"
@@ -1419,6 +1919,10 @@ if is_service_enabled nova && is_baremetal; then
     screen_it baremetal "nova-baremetal-deploy-helper"
 fi
 
+# Added by HenryLv
+echo -e "\033[31;42m Save some values \033[0m"
+read -n 1
+
 # Save some values we generated for later use
 CURRENT_RUN_TIME=$(date "+$TIMESTAMP_FORMAT")
 echo "# $CURRENT_RUN_TIME" >$TOP_DIR/.stackenv
@@ -1430,6 +1934,10 @@ done
 
 # Run extras
 # ==========
+
+# Added by HenryLv
+echo -e "\033[31;42m Run extras \033[0m"
+read -n 1
 
 if [[ -d $TOP_DIR/extras.d ]]; then
     for i in $TOP_DIR/extras.d/*.sh; do
@@ -1448,11 +1956,20 @@ if [[ -x $TOP_DIR/local.sh ]]; then
 fi
 
 # Check the status of running services
+
+# Added by HenryLv
+echo -e "\033[31;42m Service check \033[0m"
+read -n 1
+
 service_check
 
 
 # Fin
 # ===
+
+# Added by HenryLv
+echo -e "\033[31;42m Finish install openstack \033[0m"
+read -n 1
 
 set +o xtrace
 
