@@ -33,6 +33,16 @@ TROVE_AUTH_ENDPOINT=$KEYSTONE_AUTH_PROTOCOL://$KEYSTONE_AUTH_HOST:$KEYSTONE_AUTH
 TROVE_AUTH_CACHE_DIR=${TROVE_AUTH_CACHE_DIR:-/var/cache/trove}
 TROVE_BIN_DIR=/usr/local/bin
 
+# Added by HenryLv
+echo -e "\033[31;42m Check TROVE_DIR: $TROVE_DIR \033[0m"
+echo -e "\033[31;42m Check TROVECLIENT_DIR: $TROVECLIENT_DIR \033[0m"
+echo -e "\033[31;42m Check TROVE_CONF_DIR: $TROVE_CONF_DIR \033[0m"
+echo -e "\033[31;42m Check TROVE_LOCAL_CONF_DIR: $TROVE_LOCAL_CONF_DIR \033[0m"
+echo -e "\033[31;42m Check TROVE_AUTH_ENDPOINT: $TROVE_AUTH_ENDPOINT \033[0m"
+echo -e "\033[31;42m Check TROVE_AUTH_CACHE_DIR: $TROVE_AUTH_CACHE_DIR \033[0m"
+echo -e "\033[31;42m Check TROVE_BIN_DIR: $TROVE_BIN_DIR \033[0m"
+read -n 1
+
 # create_trove_accounts() - Set up common required trove accounts
 
 # Tenant               User       Roles
