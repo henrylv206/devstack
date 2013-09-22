@@ -22,6 +22,10 @@ set +o xtrace
 OSLOCFG_DIR=$DEST/oslo.config
 OSLOMSG_DIR=$DEST/oslo.messaging
 
+# Added by HenryLv
+echo -e "\033[31;42m Check OSLOCFG_DIR: $OSLOCFG_DIR, OSLOMSG_DIR: $OSLOMSG_DIR \033[0m"
+read -n 1
+
 # Entry Points
 # ------------
 
