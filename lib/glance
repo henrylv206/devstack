@@ -32,6 +32,14 @@ GLANCE_CACHE_DIR=${GLANCE_CACHE_DIR:=$DATA_DIR/glance/cache}
 GLANCE_IMAGE_DIR=${GLANCE_IMAGE_DIR:=$DATA_DIR/glance/images}
 GLANCE_AUTH_CACHE_DIR=${GLANCE_AUTH_CACHE_DIR:-/var/cache/glance}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check GLANCE_DIR:$GLANCE_DIR \033[0m"
+echo -e "\033[31;42m Check GLANCECLIENT_DIR:$GLANCECLIENT_DIR \033[0m"
+echo -e "\033[31;42m Check GLANCE_CACHE_DIR:$GLANCE_CACHE_DIR \033[0m"
+echo -e "\033[31;42m Check GLANCE_IMAGE_DIR:$GLANCE_IMAGE_DIR \033[0m"
+echo -e "\033[31;42m Check GLANCE_AUTH_CACHE_DIR:$GLANCE_AUTH_CACHE_DIR \033[0m"
+read -n 1
+
 GLANCE_CONF_DIR=${GLANCE_CONF_DIR:-/etc/glance}
 GLANCE_REGISTRY_CONF=$GLANCE_CONF_DIR/glance-registry.conf
 GLANCE_API_CONF=$GLANCE_CONF_DIR/glance-api.conf
@@ -40,6 +48,17 @@ GLANCE_API_PASTE_INI=$GLANCE_CONF_DIR/glance-api-paste.ini
 GLANCE_CACHE_CONF=$GLANCE_CONF_DIR/glance-cache.conf
 GLANCE_POLICY_JSON=$GLANCE_CONF_DIR/policy.json
 GLANCE_SCHEMA_JSON=$GLANCE_CONF_DIR/schema-image.json
+
+# Added by HenryLv
+echo -e "\033[31;42m GLANCE_CONF_DIR: $GLANCE_CONF_DIR \033[0m"
+echo -e "\033[31;42m GLANCE_REGISTRY_CONF: $GLANCE_REGISTRY_CONF \033[0m"
+echo -e "\033[31;42m GLANCE_API_CONF: $GLANCE_API_CONF \033[0m"
+echo -e "\033[31;42m GLANCE_REGISTRY_PASTE_INI: $GLANCE_REGISTRY_PASTE_INI \033[0m"
+echo -e "\033[31;42m GLANCE_API_PASTE_INI: $GLANCE_API_PASTE_INI \033[0m"
+echo -e "\033[31;42m GLANCE_CACHE_CONF: $GLANCE_CACHE_CONF \033[0m"
+echo -e "\033[31;42m GLANCE_POLICY_JSON: $GLANCE_POLICY_JSON \033[0m"
+echo -e "\033[31;42m GLANCE_SCHEMA_JSON: $GLANCE_SCHEMA_JSON \033[0m"
+read -n 1
 
 # Support entry points installation of console scripts
 if [[ -d $GLANCE_DIR/bin ]]; then
@@ -51,6 +70,10 @@ fi
 # Glance connection info.  Note the port must be specified.
 GLANCE_HOSTPORT=${GLANCE_HOSTPORT:-$SERVICE_HOST:9292}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check GLANCE_BIN_DIR: $GLANCE_BIN_DIR \033[0m"
+echo -e "\033[31;42m Check GLANCE_HOSTPORT: $GLANCE_HOSTPORT \033[0m"
+read -n 1
 
 # Functions
 # ---------
