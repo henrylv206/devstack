@@ -32,29 +32,52 @@ if is_service_enabled tls-proxy; then
     SERVICE_PROTOCOL=https
 fi
 
+# Added by HenryLv
+echo -e "\033[31;42m Check TLS_IP: $TLS_IP, SERVICE_PROTOCOL: $SERVICE_PROTOCOL, SERVICE_IP: $SERVICE_IP \033[0m"
+read -n 1
+
 # Make up a hostname for cert purposes
 # will be added to /etc/hosts?
 DEVSTACK_HOSTNAME=secure.devstack.org
 DEVSTACK_CERT_NAME=devstack-cert
 DEVSTACK_CERT=$DATA_DIR/$DEVSTACK_CERT_NAME.pem
 
+# Added by HenryLv
+echo -e "\033[31;42m Check DEVSTACK_HOSTNAME: $DEVSTACK_HOSTNAME, DEVSTACK_CERT_NAME: $DEVSTACK_CERT_NAME, DEVSTACK_CERT: $DEVSTACK_CERT \033[0m"
+read -n 1
+
 # CA configuration
 ROOT_CA_DIR=${ROOT_CA_DIR:-$DATA_DIR/CA/root-ca}
 INT_CA_DIR=${INT_CA_DIR:-$DATA_DIR/CA/int-ca}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check ROOT_CA_DIR: $ROOT_CA_DIR, INT_CA_DIR: $INT_CA_DIR \033[0m"
+read -n 1
+
 ORG_NAME="OpenStack"
 ORG_UNIT_NAME="DevStack"
+
+# Added by HenryLv
+echo -e "\033[31;42m Check ORG_NAME: $ORG_NAME, ORG_UNIT_NAME: $ORG_UNIT_NAME \033[0m"
+read -n 1
 
 # Stud configuration
 STUD_PROTO="--tls"
 STUD_CIPHERS='TLSv1+HIGH:!DES:!aNULL:!eNULL:@STRENGTH'
 
+# Added by HenryLv
+echo -e "\033[31;42m Check STUD_PROTO: $STUD_PROTO, STUD_CIPHERS: $STUD_CIPHERS \033[0m"
+read -n 1
 
 # CA Functions
 # ============
 
 # There may be more than one, get specific
 OPENSSL=${OPENSSL:-/usr/bin/openssl}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check OPENSSL: $OPENSSL \033[0m"
+read -n 1
 
 # Do primary CA configuration
 function configure_CA() {
