@@ -36,6 +36,17 @@ HEAT_CONF=$HEAT_CONF_DIR/heat.conf
 HEAT_ENV_DIR=$HEAT_CONF_DIR/environment.d
 HEAT_TEMPLATES_DIR=$HEAT_CONF_DIR/templates
 
+# Added by HenryLv
+echo -e "\033[31;42m Check HEAT_DIR: $HEAT_DIR \033[0m"
+echo -e "\033[31;42m Check HEATCLIENT_DIR: $HEATCLIENT_DIR \033[0m"
+echo -e "\033[31;42m Check HEAT_AUTH_CACHE_DIR: $HEAT_AUTH_CACHE_DIR \033[0m"
+echo -e "\033[31;42m Check HEAT_STANDALONE: $HEAT_STANDALONE \033[0m"
+echo -e "\033[31;42m Check HEAT_CONF_DIR: $HEAT_CONF_DIR \033[0m"
+echo -e "\033[31;42m Check HEAT_CONF: $HEAT_CONF \033[0m"
+echo -e "\033[31;42m Check HEAT_ENV_DIR: $HEAT_ENV_DIR \033[0m"
+echo -e "\033[31;42m Check HEAT_TEMPLATES_DIR: $HEAT_TEMPLATES_DIR \033[0m"
+read -n 1
+
 # Functions
 # ---------
 
