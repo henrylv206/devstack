@@ -3,11 +3,23 @@
 # Find the other rc files
 RC_DIR=$(cd $(dirname "$BASH_SOURCE") && pwd)
 
+# Added by HenryLv
+echo -e "\033[31;42m Check RC_DIR: $RC_DIR \033[0m"
+read -n 1
+
 # Destination path for installation
 DEST=/opt/stack
 
+# Added by HenryLv
+echo -e "\033[31;42m Check DEST: $DEST \033[0m"
+read -n 1
+
 # Destination for working data
 DATA_DIR=${DEST}/data
+
+# Added by HenryLv
+echo -e "\033[31;42m Check DATA_DIR: $DATA_DIR \033[0m"
+read -n 1
 
 # Determine stack user
 if [[ $EUID -eq 0 ]]; then
@@ -15,6 +27,10 @@ if [[ $EUID -eq 0 ]]; then
 else
     STACK_USER=$(whoami)
 fi
+
+# Added by HenryLv
+echo -e "\033[31;42m Check STACK_USER: $STACK_USER \033[0m"
+read -n 1
 
 # Specify which services to launch.  These generally correspond to
 # screen tabs. To change the default list, use the ``enable_service`` and
@@ -34,11 +50,23 @@ fi
 #  enable_service tempest
 ENABLED_SERVICES=g-api,g-reg,key,n-api,n-crt,n-obj,n-cpu,n-net,n-cond,cinder,c-sch,c-api,c-vol,n-sch,n-novnc,n-xvnc,n-cauth,horizon,rabbit,tempest,mysql
 
+# Added by HenryLv
+echo -e "\033[31;42m Check ENABLED_SERVICES: $ENABLED_SERVICES \033[0m"
+read -n 1
+
 # Set the default Nova APIs to enable
 NOVA_ENABLED_APIS=ec2,osapi_compute,metadata
 
+# Added by HenryLv
+echo -e "\033[31;42m Check NOVA_ENABLED_APIS: $NOVA_ENABLED_APIS \033[0m"
+read -n 1
+
 # Configure Identity API version: 2.0, 3
 IDENTITY_API_VERSION=2.0
+
+# Added by HenryLv
+echo -e "\033[31;42m Check IDENTITY_API_VERSION: $IDENTITY_API_VERSION \033[0m"
+read -n 1
 
 # Whether to use 'dev mode' for screen windows. Dev mode works by
 # stuffing text into the screen windows so that a developer can use
@@ -49,6 +77,10 @@ USE_SCREEN=True
 
 # allow local overrides of env variables, including repo config
 if [ -f $RC_DIR/localrc ]; then
+    # Added by HenryLv
+    echo -e "\033[31;42m Import script: $RC_DIR/localrc \033[0m"
+    read -n 1
+
     source $RC_DIR/localrc
 fi
 
@@ -60,89 +92,177 @@ fi
 # Another option is http://review.openstack.org/p
 GIT_BASE=${GIT_BASE:-https://github.com}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check GIT_BASE: $GIT_BASE \033[0m"
+read -n 1
+
 # metering service
 CEILOMETER_REPO=${CEILOMETER_REPO:-${GIT_BASE}/openstack/ceilometer.git}
 CEILOMETER_BRANCH=${CEILOMETER_BRANCH:-master}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check CEILOMETER_REPO: $CEILOMETER_REPO, CEILOMETER_BRANCH: $CEILOMETER_BRANCH \033[0m"
+read -n 1
 
 # ceilometer client library
 CEILOMETERCLIENT_REPO=${CEILOMETERCLIENT_REPO:-${GIT_BASE}/openstack/python-ceilometerclient.git}
 CEILOMETERCLIENT_BRANCH=${CEILOMETERCLIENT_BRANCH:-master}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check CEILOMETERCLIENT_REPO: $CEILOMETERCLIENT_REPO, CEILOMETERCLIENT_BRANCH: $CEILOMETERCLIENT_BRANCH \033[0m"
+read -n 1
+
 # volume service
 CINDER_REPO=${CINDER_REPO:-${GIT_BASE}/openstack/cinder.git}
 CINDER_BRANCH=${CINDER_BRANCH:-master}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check CINDER_REPO: $CINDER_REPO, CINDER_BRANCH: $CINDER_BRANCH \033[0m"
+read -n 1
 
 # volume client
 CINDERCLIENT_REPO=${CINDERCLIENT_REPO:-${GIT_BASE}/openstack/python-cinderclient.git}
 CINDERCLIENT_BRANCH=${CINDERCLIENT_BRANCH:-master}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check CINDERCLIENT_REPO: $CINDERCLIENT_REPO, CINDERCLIENT_BRANCH: $CINDERCLIENT_BRANCH \033[0m"
+read -n 1
+
 # image catalog service
 GLANCE_REPO=${GLANCE_REPO:-${GIT_BASE}/openstack/glance.git}
 GLANCE_BRANCH=${GLANCE_BRANCH:-master}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check GLANCE_REPO: $GLANCE_REPO, GLANCE_BRANCH: $GLANCE_BRANCH \033[0m"
+read -n 1
 
 # python glance client library
 GLANCECLIENT_REPO=${GLANCECLIENT_REPO:-${GIT_BASE}/openstack/python-glanceclient.git}
 GLANCECLIENT_BRANCH=${GLANCECLIENT_BRANCH:-master}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check GLANCECLIENT_REPO: $GLANCECLIENT_REPO, GLANCECLIENT_BRANCH: $GLANCECLIENT_BRANCH \033[0m"
+read -n 1
+
 # heat service
 HEAT_REPO=${HEAT_REPO:-${GIT_BASE}/openstack/heat.git}
 HEAT_BRANCH=${HEAT_BRANCH:-master}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check HEAT_REPO: $HEAT_REPO, HEAT_BRANCH: $HEAT_BRANCH \033[0m"
+read -n 1
 
 # python heat client library
 HEATCLIENT_REPO=${HEATCLIENT_REPO:-${GIT_BASE}/openstack/python-heatclient.git}
 HEATCLIENT_BRANCH=${HEATCLIENT_BRANCH:-master}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check HEATCLIENT_REPO: $HEATCLIENT_REPO, HEATCLIENT_BRANCH: $HEATCLIENT_BRANCH \033[0m"
+read -n 1
+
 # django powered web control panel for openstack
 HORIZON_REPO=${HORIZON_REPO:-${GIT_BASE}/openstack/horizon.git}
 HORIZON_BRANCH=${HORIZON_BRANCH:-master}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check HORIZON_REPO: $HORIZON_REPO, HORIZON_BRANCH: $HORIZON_BRANCH \033[0m"
+read -n 1
 
 # baremetal provisionint service
 IRONIC_REPO=${IRONIC_REPO:-${GIT_BASE}/openstack/ironic.git}
 IRONIC_BRANCH=${IRONIC_BRANCH:-master}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check IRONIC_REPO: $IRONIC_REPO, IRONIC_BRANCH: $IRONIC_BRANCH \033[0m"
+read -n 1
+
 # unified auth system (manages accounts/tokens)
 KEYSTONE_REPO=${KEYSTONE_REPO:-${GIT_BASE}/openstack/keystone.git}
 KEYSTONE_BRANCH=${KEYSTONE_BRANCH:-master}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check KEYSTONE_REPO: $KEYSTONE_REPO, KEYSTONE_BRANCH: $KEYSTONE_BRANCH \033[0m"
+read -n 1
 
 # python keystone client library to nova that horizon uses
 KEYSTONECLIENT_REPO=${KEYSTONECLIENT_REPO:-${GIT_BASE}/openstack/python-keystoneclient.git}
 KEYSTONECLIENT_BRANCH=${KEYSTONECLIENT_BRANCH:-master}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check KEYSTONECLIENT_REPO: $KEYSTONECLIENT_REPO, KEYSTONECLIENT_BRANCH: $KEYSTONECLIENT_BRANCH \033[0m"
+read -n 1
+
 # compute service
 NOVA_REPO=${NOVA_REPO:-${GIT_BASE}/openstack/nova.git}
 NOVA_BRANCH=${NOVA_BRANCH:-master}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check NOVA_REPO: $NOVA_REPO, NOVA_BRANCH: $NOVA_BRANCH \033[0m"
+read -n 1
 
 # python client library to nova that horizon (and others) use
 NOVACLIENT_REPO=${NOVACLIENT_REPO:-${GIT_BASE}/openstack/python-novaclient.git}
 NOVACLIENT_BRANCH=${NOVACLIENT_BRANCH:-master}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check NOVACLIENT_REPO: $NOVACLIENT_REPO, NOVACLIENT_BRANCH: $NOVACLIENT_BRANCH \033[0m"
+read -n 1
+
 # consolidated openstack python client
 OPENSTACKCLIENT_REPO=${OPENSTACKCLIENT_REPO:-${GIT_BASE}/openstack/python-openstackclient.git}
 OPENSTACKCLIENT_BRANCH=${OPENSTACKCLIENT_BRANCH:-master}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check OPENSTACKCLIENT_REPO: $OPENSTACKCLIENT_REPO, OPENSTACKCLIENT_BRANCH: $OPENSTACKCLIENT_BRANCH \033[0m"
+read -n 1
 
 # oslo.config
 OSLOCFG_REPO=${OSLOCFG_REPO:-${GIT_BASE}/openstack/oslo.config.git}
 OSLOCFG_BRANCH=${OSLOCFG_BRANCH:-master}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check OSLOCFG_REPO: $OSLOCFG_REPO, OSLOCFG_BRANCH: $OSLOCFG_BRANCH \033[0m"
+read -n 1
+
 # oslo.messaging
 OSLOMSG_REPO=${OSLOMSG_REPO:-${GIT_BASE}/openstack/oslo.messaging.git}
 OSLOMSG_BRANCH=${OSLOMSG_BRANCH:-master}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check OSLOMSG_REPO: $OSLOMSG_REPO, OSLOMSG_BRANCH: $OSLOMSG_BRANCH \033[0m"
+read -n 1
 
 # pbr drives the setuptools configs
 PBR_REPO=${PBR_REPO:-${GIT_BASE}/openstack-dev/pbr.git}
 PBR_BRANCH=${PBR_BRANCH:-master}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check PBR_REPO: $PBR_REPO, PBR_BRANCH: $PBR_BRANCH \033[0m"
+read -n 1
+
 # neutron service
 NEUTRON_REPO=${NEUTRON_REPO:-${GIT_BASE}/openstack/neutron.git}
 NEUTRON_BRANCH=${NEUTRON_BRANCH:-master}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check NEUTRON_REPO: $NEUTRON_REPO, NEUTRON_BRANCH: $NEUTRON_BRANCH \033[0m"
+read -n 1
 
 # neutron client
 NEUTRONCLIENT_REPO=${NEUTRONCLIENT_REPO:-${GIT_BASE}/openstack/python-neutronclient.git}
 NEUTRONCLIENT_BRANCH=${NEUTRONCLIENT_BRANCH:-master}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check NEUTRONCLIENT_REPO: $NEUTRONCLIENT_REPO, NEUTRONCLIENT_BRANCH: $NEUTRONCLIENT_BRANCH \033[0m"
+read -n 1
+
 # consolidated openstack requirements
 REQUIREMENTS_REPO=${REQUIREMENTS_REPO:-${GIT_BASE}/openstack/requirements.git}
 REQUIREMENTS_BRANCH=${REQUIREMENTS_BRANCH:-master}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check REQUIREMENTS_REPO: $REQUIREMENTS_REPO, REQUIREMENTS_BRANCH: $REQUIREMENTS_BRANCH \033[0m"
+read -n 1
 
 # storage service
 SWIFT_REPO=${SWIFT_REPO:-${GIT_BASE}/openstack/swift.git}
@@ -150,18 +270,33 @@ SWIFT_BRANCH=${SWIFT_BRANCH:-master}
 SWIFT3_REPO=${SWIFT3_REPO:-${GIT_BASE}/fujita/swift3.git}
 SWIFT3_BRANCH=${SWIFT3_BRANCH:-master}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check SWIFT_REPO: $SWIFT_REPO, SWIFT_BRANCH: $SWIFT_BRANCH, SWIFT3_REPO: $SWIFT3_REPO, SWIFT3_BRANCH: $SWIFT3_BRANCH \033[0m"
+read -n 1
+
 # python swift client library
 SWIFTCLIENT_REPO=${SWIFTCLIENT_REPO:-${GIT_BASE}/openstack/python-swiftclient.git}
 SWIFTCLIENT_BRANCH=${SWIFTCLIENT_BRANCH:-master}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check SWIFTCLIENT_REPO: $SWIFTCLIENT_REPO, SWIFTCLIENT_BRANCH: $SWIFTCLIENT_BRANCH \033[0m"
+read -n 1
 
 # Tempest test suite
 TEMPEST_REPO=${TEMPEST_REPO:-${GIT_BASE}/openstack/tempest.git}
 TEMPEST_BRANCH=${TEMPEST_BRANCH:-master}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check TEMPEST_REPO: $TEMPEST_REPO, TEMPEST_BRANCH: $TEMPEST_BRANCH \033[0m"
+read -n 1
 
 # diskimage-builder
 BM_IMAGE_BUILD_REPO=${BM_IMAGE_BUILD_REPO:-${GIT_BASE}/stackforge/diskimage-builder.git}
 BM_IMAGE_BUILD_BRANCH=${BM_IMAGE_BUILD_BRANCH:-master}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check BM_IMAGE_BUILD_REPO: $BM_IMAGE_BUILD_REPO, BM_IMAGE_BUILD_BRANCH: $BM_IMAGE_BUILD_BRANCH \033[0m"
+read -n 1
 
 # bm_poseur
 # Used to simulate a hardware environment for baremetal
@@ -169,25 +304,49 @@ BM_IMAGE_BUILD_BRANCH=${BM_IMAGE_BUILD_BRANCH:-master}
 BM_POSEUR_REPO=${BM_POSEUR_REPO:-${GIT_BASE}/tripleo/bm_poseur.git}
 BM_POSEUR_BRANCH=${BM_POSEUR_BRANCH:-master}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check BM_POSEUR_REPO: $BM_POSEUR_REPO, BM_POSEUR_BRANCH: $BM_POSEUR_BRANCH \033[0m"
+read -n 1
+
 # a websockets/html5 or flash powered VNC console for vm instances
 NOVNC_REPO=${NOVNC_REPO:-${GIT_BASE}/kanaka/noVNC.git}
 NOVNC_BRANCH=${NOVNC_BRANCH:-master}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check NOVNC_REPO: $NOVNC_REPO, NOVNC_BRANCH: $NOVNC_BRANCH \033[0m"
+read -n 1
 
 # ryu service
 RYU_REPO=${RYU_REPO:-${GIT_BASE}/osrg/ryu.git}
 RYU_BRANCH=${RYU_BRANCH:-master}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check RYU_REPO: $RYU_REPO, RYU_BRANCH: $RYU_BRANCH \033[0m"
+read -n 1
+
 # a websockets/html5 or flash powered SPICE console for vm instances
 SPICE_REPO=${SPICE_REPO:-http://anongit.freedesktop.org/git/spice/spice-html5.git}
 SPICE_BRANCH=${SPICE_BRANCH:-master}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check SPICE_REPO: $SPICE_REPO, SPICE_BRANCH: $SPICE_BRANCH \033[0m"
+read -n 1
 
 # trove service
 TROVE_REPO=${TROVE_REPO:-${GIT_BASE}/openstack/trove.git}
 TROVE_BRANCH=${TROVE_BRANCH:-master}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check TROVE_REPO: $TROVE_REPO, TROVE_BRANCH: $TROVE_BRANCH \033[0m"
+read -n 1
+
 # trove client library test
 TROVECLIENT_REPO=${TROVECLIENT_REPO:-${GIT_BASE}/openstack/python-troveclient.git}
 TROVECLIENT_BRANCH=${TROVECLIENT_BRANCH:-master}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check TROVECLIENT_REPO: $TROVECLIENT_REPO, TROVECLIENT_BRANCH: $TROVECLIENT_BRANCH \033[0m"
+read -n 1
 
 # Nova hypervisor configuration.  We default to libvirt with **kvm** but will
 # drop back to **qemu** if we are unable to load the kvm module.  ``stack.sh`` can
@@ -216,6 +375,9 @@ case "$VIRT_DRIVER" in
         ;;
 esac
 
+# Added by HenryLv
+echo -e "\033[31;42m Check DEFAULT_VIRT_DRIVER: $DEFAULT_VIRT_DRIVER, VIRT_DRIVER: $VIRT_DRIVER, LIBVIRT_TYPE: $LIBVIRT_TYPE, LIBVIRT_GROUP: $LIBVIRT_GROUP \033[0m"
+read -n 1
 
 # Images
 # ------
@@ -264,30 +426,61 @@ case "$VIRT_DRIVER" in
         IMAGE_URLS=${IMAGE_URLS:-"http://download.cirros-cloud.net/0.3.1/cirros-0.3.1-x86_64-uec.tar.gz"};;
 esac
 
+# Added by HenryLv
+echo -e "\033[31;42m Check DEFAULT_IMAGE_NAME: $DEFAULT_IMAGE_NAME, IMAGE_URLS: $IMAGE_URLS \033[0m"
+read -n 1
 
 # 10Gb default volume backing file size
 VOLUME_BACKING_FILE_SIZE=${VOLUME_BACKING_FILE_SIZE:-10250M}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check VOLUME_BACKING_FILE_SIZE: $VOLUME_BACKING_FILE_SIZE \033[0m"
+read -n 1
 
 # Name of the LVM volume group to use/create for iscsi volumes
 VOLUME_GROUP=${VOLUME_GROUP:-stack-volumes}
 VOLUME_NAME_PREFIX=${VOLUME_NAME_PREFIX:-volume-}
 INSTANCE_NAME_PREFIX=${INSTANCE_NAME_PREFIX:-instance-}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check VOLUME_GROUP: $VOLUME_GROUP, VOLUME_NAME_PREFIX: $VOLUME_NAME_PREFIX, INSTANCE_NAME_PREFIX: $INSTANCE_NAME_PREFIX \033[0m"
+read -n 1
+
 # Set default port for nova-objectstore
 S3_SERVICE_PORT=${S3_SERVICE_PORT:-3333}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check S3_SERVICE_PORT: $S3_SERVICE_PORT \033[0m"
+read -n 1
 
 # Common network names
 PRIVATE_NETWORK_NAME=${PRIVATE_NETWORK_NAME:-"private"}
 PUBLIC_NETWORK_NAME=${PUBLIC_NETWORK_NAME:-"public"}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check PRIVATE_NETWORK_NAME: $PRIVATE_NETWORK_NAME, PUBLIC_NETWORK_NAME: $PUBLIC_NETWORK_NAME \033[0m"
+read -n 1
+
 # Compatibility until it's eradicated from CI
 USE_SCREEN=${SCREEN_DEV:-$USE_SCREEN}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check USE_SCREEN: $USE_SCREEN \033[0m"
+read -n 1
 
 # Set default screen name
 SCREEN_NAME=${SCREEN_NAME:-stack}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check SCREEN_NAME: $SCREEN_NAME \033[0m"
+read -n 1
+
 # Do not install packages tagged with 'testonly' by default
 INSTALL_TESTONLY_PACKAGES=${INSTALL_TESTONLY_PACKAGES:-False}
+
+# Added by HenryLv
+echo -e "\033[31;42m Check INSTALL_TESTONLY_PACKAGES: $INSTALL_TESTONLY_PACKAGES \033[0m"
+read -n 1
 
 # Local variables:
 # mode: shell-script
