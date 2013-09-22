@@ -22,6 +22,10 @@ set +o xtrace
 PBR_DIR=$DEST/pbr
 REQUIREMENTS_DIR=$DEST/requirements
 
+# Added by HenryLv
+echo -e "\033[31;42m Check PBR_DIR: $PBR_DIR, REQUIREMENTS_DIR: $REQUIREMENTS_DIR \033[0m"
+read -n 1
+
 # Entry Points
 # ------------
 
