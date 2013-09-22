@@ -20,6 +20,9 @@ set +o xtrace
 APACHE_USER=${APACHE_USER:-$USER}
 APACHE_GROUP=${APACHE_GROUP:-$(id -gn $APACHE_USER)}
 
+# Added by HenryLv
+echo -e "\033[31;42m Check APACHE_USER: $APACHE_USER, APACHE_GROUP: $APACHE_GROUP \033[0m"
+read -n 1
 
 # Set up apache name and configuration directory
 if is_ubuntu; then
@@ -32,6 +35,10 @@ elif is_suse; then
     APACHE_NAME=apache2
     APACHE_CONF_DIR=vhosts.d
 fi
+
+# Added by HenryLv
+echo -e "\033[31;42m Check APACHE_NAME: $APACHE_NAME, APACHE_CONF_DIR: $APACHE_CONF_DIR \033[0m"
+read -n 1
 
 # Functions
 # ---------
