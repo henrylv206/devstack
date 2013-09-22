@@ -30,6 +30,10 @@ function register_database {
 
 # Sourcing the database libs sets DATABASE_BACKENDS with the available list
 for f in $TOP_DIR/lib/databases/*; do
+    # Added by HenryLv
+    echo -e "\033[31;42m Import script: $f \033[0m"
+    read -n 1
+
     source $f;
 done
 
@@ -42,6 +46,11 @@ for db in $DATABASE_BACKENDS; do
         DATABASE_TYPE=$db
     fi
 done
+
+# Added by HenryLv
+echo -e "\033[31;42m Check DATABASE_TYPE: $DATABASE_TYPE \033[0m"
+read -n 1
+
 # If ``DATABASE_TYPE`` is unset here no database was selected
 # This is not an error as multi-node installs will do this on the compute nodes
 
