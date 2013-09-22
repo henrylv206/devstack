@@ -30,6 +30,10 @@ set +o xtrace
 # Set up default directories
 HORIZON_DIR=$DEST/horizon
 
+# Added by HenryLv
+echo -e "\033[31;42m Check HORIZON_DIR: $HORIZON_DIR \033[0m"
+read -n 1
+
 # local_settings.py is used to customize Dashboard settings.
 # The example file in Horizon repo is used by default.
 HORIZON_SETTINGS=${HORIZON_SETTINGS:-$HORIZON_DIR/openstack_dashboard/local/local_settings.py.example}
